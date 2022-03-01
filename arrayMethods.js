@@ -362,6 +362,7 @@ console.log('The characters that are human', humanCharacters);
 // return a new array
 // it returns everything that matches our condition
 // the indexes will remain the same
+// if no index matched our condition, will return an empty array
 // Ex: [A, B, C, A, C, D].filter(A) -> [A, A]
 
 // .find
