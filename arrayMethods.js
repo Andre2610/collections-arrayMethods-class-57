@@ -335,6 +335,8 @@ const characters = [
   },
 ];
 
+const patients = require('./patients');
+
 // const myArray = [1, 3, 76, 5, 85, 3, 7, 99, 100, 120, 145, 57, 42, 87, 75, 43];
 
 // myArray.filter((potato) => {
@@ -348,7 +350,7 @@ const characters = [
 // array methods will iterate over the array -> 0 -> 1 -> 2
 const humanCharacters = characters.filter((character) => {
   //   console.log('Do I want this character?', character.species === 'Human');
-  return character.species === 'Humasfan';
+  return character.species === 'Human';
 });
 
 // const newArray = [];
@@ -357,7 +359,7 @@ const humanCharacters = characters.filter((character) => {
 //   if (character.species === 'Human') newArray.push(character);
 // });
 
-console.log('The characters that are human', humanCharacters);
+// console.log('The characters that are human', humanCharacters);
 
 // return a new array
 // it returns everything that matches our condition
@@ -381,7 +383,7 @@ const characterWithNoPatronus = characters.find((character) => {
   return character.patronus === 'None' && character.blood === 'Half-blood';
 });
 
-console.log('Character with no patronus', characterWithNoPatronus);
+// console.log('Character with no patronus', characterWithNoPatronus);
 
 // .find
 // returns first index / element that matches our criteria
@@ -389,3 +391,89 @@ console.log('Character with no patronus', characterWithNoPatronus);
 // returns undefined it there is not match
 // ex: [A, B, C, D].find(C) -> C
 // ex: [A, B, B, C, D, D].find(D) -> D
+
+// .map
+
+const patientEmails = patients.map((patient) => {
+  return patient.email;
+});
+
+// console.log('The emails of our patients', patientEmails);
+
+const modifiedPatientsArray = patients.map((patient) => {
+  const {
+    firstName,
+    lastName,
+    id,
+    age,
+    gender,
+    phoneNumber,
+    email,
+    weight,
+    height,
+    dailyExercise,
+  } = patient;
+
+  return {
+    id,
+    fullName: `${firstName} ${lastName}`,
+    age,
+    gender,
+    phoneNumber,
+    email,
+    weight,
+    height,
+    dailyExercise,
+  };
+});
+
+// console.log('Our modified array', modifiedPatientsArray);
+
+const patientsWithPrefix = patients.map((patient) => {
+  const {
+    firstName,
+    lastName,
+    id,
+    age,
+    gender,
+    phoneNumber,
+    email,
+    weight,
+    height,
+    dailyExercise,
+  } = patient;
+  if (patient.gender === 'm') {
+    return { ...patient, prefix: 'Mr' };
+  } else {
+    return {
+      id,
+      firstName,
+      lastName,
+      age,
+      gender,
+      phoneNumber,
+      email,
+      weight,
+      height,
+      dailyExercise,
+      prefix: 'Mrs',
+    };
+  }
+});
+
+// console.log('Patients with prefix', patientsWithPrefix);
+
+const humanCharactersWithMap = characters.map((character) => {
+  //   console.log('Do I want this character?', character.species === 'Human');
+  if (character.species === 'Human') {
+    return character;
+  }
+});
+
+console.log('HumanCharactersWithMap', humanCharactersWithMap);
+
+// .map
+// returns an array
+// the new array has the same length as the original one
+// new array has updated/modified data
+// ex: [O, O, O, O] -> [X, X, X, X]
